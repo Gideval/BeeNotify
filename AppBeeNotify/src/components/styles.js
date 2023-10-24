@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
       backgroundColor: '#FFBB00',
     },
     imageBackground: {
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     viewCustom: {
       flex: 0.55, // Define a altura da metade da tela
-      backgroundColor: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5))`, 
+      backgroundColor: `linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 0.6))`, 
       borderTopLeftRadius: 50,
       borderTopRightRadius: 50,
       justifyContent: 'center',
@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
         
     },
     image: {
-        width: 200,
-        height: 100,
+        
+        width: '45%',
+        height: '20%',
       },
       title: {
         fontSize: 24,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
       },
       gradient: {
         width: '100%',
-        height: '55%',
+        height: '75%',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         alignItems: 'center',

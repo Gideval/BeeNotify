@@ -12,9 +12,11 @@ function LoginPage () {
 
     return(
         <View style={styles.container} >
+            <View style={styles.container} ></View>
             <Image source={require('../../assets/abelha.png')} style={styles.image}/>
             <Text style={styles.title}>BeeNotify</Text>
-            <LinearGradient colors={['rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.4)']} 
+            <View style={styles.container} ></View>
+            <LinearGradient colors={['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 0.5)']} 
                 style={styles.gradient}>
                         <TextInput style={styles.input} placeholder="Digite algo" />
                         <TextInput style={styles.input} placeholder="Digite algo" />
