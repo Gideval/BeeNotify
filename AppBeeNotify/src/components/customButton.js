@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import { metrics } from "../../styles";
+import { metrics } from "../styles";
 
 const CustomButton = styled(TouchableOpacity)`
   background-color: ${(props) => props.backgroundColor || '#3498db'};

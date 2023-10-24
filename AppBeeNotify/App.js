@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { CustomButton } from './src/components/atoms/customButton';
+import { CustomButton, CustomText } from './src/components/index';
 
 export default function App() {
 
@@ -11,7 +11,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CustomButton  w='150' h='50' onPress={handleButtonPress}>
-        <Text>clique aqui </Text>
+        <CustomText>clique aqui </CustomText>
       </CustomButton>
       <Text>Open up App.js </Text>
       <StatusBar style="auto" />
