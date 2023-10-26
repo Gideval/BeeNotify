@@ -1,32 +1,62 @@
-import React from "react";
+import React,  { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, Text, TextInput, Button, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TextInput, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { CustomButton, styles } from '../components/index';
+import { styles } from '../components/index';
+import { Ionicons } from '@expo/vector-icons';
 
 function LoginPage () {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
     const handleButtonPress = () => {
         alert('Botão Pressionado', 'Ação executada ao pressionar o botão');
       };
 
     return(
-        <View style={styles.container} >
-            <View style={styles.container} ></View>
-            <Image source={require('../../assets/abelha.png')} style={styles.image}/>
-            <Text style={styles.title}>BeeNotify</Text>
-            <View style={styles.container} ></View>
-            <LinearGradient colors={['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 0.5)']} 
-                style={styles.gradient}>
-                        <TextInput style={styles.input} placeholder="Digite algo" />
-                        <TextInput style={styles.input} placeholder="Digite algo" />
-                        <Button title="Clique Aqui" onPress={() => alert('Botão clicado!')} />
-                        <TouchableOpacity onPress={() => alert('Texto clicável clicado!')}>
-                            <Text style={styles.clickableText}>Texto Clicável</Text>
+        <View style={styles.container}>
+            <View style={styles.topView}>
+                <View style={styles.imageContainer}>
+                <Image source={require('../../assets/abelha.png')} style={styles.responsiveImage}/>
+                <Text style={styles.titleText}>BeeNotify</Text>
+                </View> 
+            </View>
+            <View style={styles.middleView}>
+                <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackground}>
+                    <Text>Email:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Digite seu email"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                    />
+
+                    <Text>Senha:</Text>
+                    <View style={styles.passwordContainer}>
+                        <TextInput
+                        style={styles.input}
+                        placeholder="Digite sua senha"
+                        secureTextEntry={!showPassword}
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        />
+                        <TouchableOpacity onPress={togglePasswordVisibility}>
+                        <Ionicons
+                            name={showPassword ? 'eye-off' : 'eye'}
+                            size={24}
+                            color="black"
+                        />
                         </TouchableOpacity>
-            </LinearGradient>
+                    </View>
+                </ImageBackground>
+            </View>
             
-            <StatusBar style="auto" />
         </View>
     );
 }

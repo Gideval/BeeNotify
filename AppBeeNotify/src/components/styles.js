@@ -3,72 +3,58 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      paddingTop: '10%',
+    },
+    topView: {
       backgroundColor: '#FFBB00',
+      width: '100%', 
+      height: '30%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    middleView: {
+      position: 'absolute',
+      top: 200, 
+      backgroundColor: '#ffff',
+      width: '100%', 
+      height: '80%',
+      borderTopLeftRadius: 50,
+      borderTopRightRadius: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    responsiveImage: {
+      resizeMode:'contain',
+      height: '40%'
+    },
+    titleText: {
+      color: '#CD6F00',
+      fontFamily: 'normal',
+      fontSize: 30,
+      fontStyle: 'normal'
+    },
+    imageContainer: {
+      alignItems: 'center',
+    },
+    input: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 10,
+      paddingHorizontal: 10,
+    },
+    passwordContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     imageBackground: {
-      width: '50%',
-      height: '50%',
-      flex: 1,
-      resizeMode: 'cover',
+      width: '100%',  
+      height: '100%', 
       justifyContent: 'center',
       alignItems: 'center',
     },
-    viewCustom: {
-      flex: 0.55, // Define a altura da metade da tela
-      backgroundColor: `linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 0.6))`, 
-      borderTopLeftRadius: 50,
-      borderTopRightRadius: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    customLinearGradient: {
-      flex: 0.55,
-      borderTopLeftRadius: 50,
-      borderTopRightRadius: 50,
-      width: '100%',
-      height: '2000%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    customTop: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        
-    },
-    image: {
-        
-        width: '45%',
-        height: '20%',
-      },
-      title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginTop: 10,
-        color: '#CD6F00',
-      },
-      gradient: {
-        width: '100%',
-        height: '75%',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      input: {
-        width: '80%',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginVertical: 10,
-      },
-      clickableText: {
-        color: 'blue',
-        textDecorationLine: 'underline',
-        marginTop: 10,
-      },
 
   });
 
