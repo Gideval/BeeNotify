@@ -1,11 +1,18 @@
 import React,  { useState } from "react";
-import { StatusBar } from 'expo-status-bar';
 import { View, Image, Text, TextInput, Button, TouchableOpacity, ImageBackground } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '../components/index';
 import { Ionicons } from '@expo/vector-icons';
+import { useFonts, Inter_900Black, Inter_800ExtraBold} from '@expo-google-fonts/inter'
 
 function LoginPage () {
+    let [fontsLoaded, fontError] = useFonts({
+        Inter_900Black,
+        Inter_800ExtraBold,
+    });
+
+    if (!fontsLoaded && fontError) {
+        return null;
+    }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,7 +31,7 @@ function LoginPage () {
             <View style={styles.topView}>
                 <View style={styles.imageContainer}>
                 <Image source={require('../../assets/abelha.png')} style={styles.responsiveImage}/>
-                <Text style={styles.titleText}>BeeNotify</Text>
+                <Text style={[styles.brandText, {fontFamily: 'Inter_800ExtraBold'}]}>BeeNotify</Text>
                 </View> 
             </View>
             <View style={styles.middleView}>

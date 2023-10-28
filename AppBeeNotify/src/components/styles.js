@@ -27,16 +27,16 @@ const styles = StyleSheet.create({
     },
     responsiveImage: {
       resizeMode:'contain',
-      height: '40%'
+      height: '45%'
     },
-    titleText: {
+    brandText: {
       color: '#CD6F00',
-      fontFamily: 'normal',
-      fontSize: 30,
-      fontStyle: 'normal'
+      fontSize: 35,
+      marginTop: '-5%',
     },
     imageContainer: {
       alignItems: 'center',
+      flexDirection: 'column'
     },
     input: {
       height: 40,
