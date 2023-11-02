@@ -30,6 +30,10 @@ function LoginPage () {
     const handleButtonPress = () => {
         navigation.navigate("RegistrationPage");
       };
+
+    const passwordRecovery = () => {
+        navigation.navigate("PasswordRecovery");
+    };
     
     const login = async () => {
         await db.loginApp(email, password);
@@ -69,14 +73,19 @@ function LoginPage () {
                         />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={handleButtonPress}>
+                    <TouchableOpacity onPress={handleButtonPress} style={styles.buttom}>
                         <View style={styles.botao}>
                             <Text style={styles.textoBotao}>Clique em mim!</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={login}>
+                    <TouchableOpacity onPress={login} style={styles.buttom}>
                         <View style={styles.botao}>
                             <Text style={styles.textoBotao}>Login</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={passwordRecovery} style={styles.buttom}>
+                        <View style={styles.botao}> 
+                            <Text style={styles.textoBotao}>Recuperar senha</Text>
                         </View>
                     </TouchableOpacity>
                 </ImageBackground>

@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
       marginBottom: 12,
       paddingHorizontal: 8,
     },
+    buttom: {
+      padding: 5,
+    },
   });
 
   export { styles };
