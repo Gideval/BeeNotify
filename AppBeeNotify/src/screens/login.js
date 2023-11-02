@@ -3,8 +3,13 @@ import { View, Image, Text, TextInput, Button, TouchableOpacity, ImageBackground
 import { styles } from '../components/index';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts, Inter_900Black, Inter_800ExtraBold} from '@expo-google-fonts/inter'
+import { useNavigation } from "@react-navigation/native";
+import firebaseDB from "../backend/firebaseDB";
 
 function LoginPage () {
+    const navigation = useNavigation();
+    const db = firebaseDB();
+
     let [fontsLoaded, fontError] = useFonts({
         Inter_900Black,
         Inter_800ExtraBold,
@@ -23,15 +28,18 @@ function LoginPage () {
   };
 
     const handleButtonPress = () => {
-        alert('Botão Pressionado', 'Ação executada ao pressionar o botão');
+        navigation.navigate("RegistrationPage");
       };
-
+    
+    const login = async () => {
+        await db.loginApp(email, password);
+    }
     return(
         <View style={styles.container}>
             <View style={styles.topView}>
                 <View style={styles.imageContainer}>
-                <Image source={require('../../assets/abelha.png')} style={styles.responsiveImage}/>
-                <Text style={[styles.brandText, {fontFamily: 'Inter_800ExtraBold'}]}>BeeNotify</Text>
+                    <Image source={require('../../assets/abelha.png')} style={styles.responsiveImage}/>
+                    <Text style={[styles.brandText, {fontFamily: 'Inter_800ExtraBold'}]}>BeeNotify</Text>
                 </View> 
             </View>
             <View style={styles.middleView}>
@@ -41,7 +49,7 @@ function LoginPage () {
                         style={styles.input}
                         placeholder="Digite seu email"
                         value={email}
-                        onChangeText={text => setEmail(text)}
+                        onChangeText={(text) => setEmail(text)}
                     />
 
                     <Text>Senha:</Text>
@@ -51,7 +59,7 @@ function LoginPage () {
                         placeholder="Digite sua senha"
                         secureTextEntry={!showPassword}
                         value={password}
-                        onChangeText={text => setPassword(text)}
+                        onChangeText={(text) => setPassword(text)}
                         />
                         <TouchableOpacity onPress={togglePasswordVisibility}>
                         <Ionicons
@@ -61,6 +69,16 @@ function LoginPage () {
                         />
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity onPress={handleButtonPress}>
+                        <View style={styles.botao}>
+                            <Text style={styles.textoBotao}>Clique em mim!</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={login}>
+                        <View style={styles.botao}>
+                            <Text style={styles.textoBotao}>Login</Text>
+                        </View>
+                    </TouchableOpacity>
                 </ImageBackground>
             </View>
             

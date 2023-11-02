@@ -55,7 +55,23 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-
+    botao: {
+      backgroundColor: 'blue',
+      padding: 10,
+      borderRadius: 5,
+    },
+    textoBotao: {
+      color: 'white',
+      fontSize: 18,
+      textAlign: 'center',
+    },
+    inputText: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 12,
+      paddingHorizontal: 8,
+    },
   });
 
   export { styles };
