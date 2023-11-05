@@ -23,9 +23,13 @@ function LoginPage () {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+    /*const emailData = {
+        useremail: email,
+    }*/
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleButtonPress = () => {
         navigation.navigate("RegistrationPage");
@@ -36,7 +40,15 @@ function LoginPage () {
     };
     
     const login = async () => {
-        await db.loginApp(email, password);
+        const resultLogin = await db.loginApp(email, password);
+        console.log(resultLogin)
+
+        if (resultLogin) {
+            navigation.navigate('MainScreen', {userEmail : email});
+        }
+        else {
+            alert('Falha no login');
+        }
     }
     return(
         <View style={styles.container}>
@@ -48,46 +60,48 @@ function LoginPage () {
             </View>
             <View style={styles.middleView}>
                 <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackground}>
-                    <Text>Email:</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite seu email"
-                        value={email}
-                        onChangeText={(text) => setEmail(text)}
-                    />
-
-                    <Text>Senha:</Text>
-                    <View style={styles.passwordContainer}>
+                    <View style={styles.content}> 
+                        <Text>Email:</Text>
                         <TextInput
-                        style={styles.input}
-                        placeholder="Digite sua senha"
-                        secureTextEntry={!showPassword}
-                        value={password}
-                        onChangeText={(text) => setPassword(text)}
+                            style={styles.input}
+                            placeholder="Digite seu email"
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
                         />
-                        <TouchableOpacity onPress={togglePasswordVisibility}>
-                        <Ionicons
-                            name={showPassword ? 'eye-off' : 'eye'}
-                            size={24}
-                            color="black"
-                        />
+
+                        <Text>Senha:</Text>
+                        <View style={styles.passwordContainer}>
+                            <TextInput
+                            style={styles.input}
+                            placeholder="Digite sua senha"
+                            secureTextEntry={!showPassword}
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
+                            />
+                            <TouchableOpacity onPress={togglePasswordVisibility}>
+                            <Ionicons
+                                name={showPassword ? 'eye-off' : 'eye'}
+                                size={24}
+                                color="black"
+                            />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={handleButtonPress} style={styles.buttom}>
+                            <View style={styles.botao}>
+                                <Text style={styles.textoBotao}>Clique em mim!</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={login} style={styles.buttom}>
+                            <View style={styles.botao}>
+                                <Text style={styles.textoBotao}>Login</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={passwordRecovery} style={styles.buttom}>
+                            <View style={styles.botao}> 
+                                <Text style={styles.textoBotao}>Recuperar senha</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={handleButtonPress} style={styles.buttom}>
-                        <View style={styles.botao}>
-                            <Text style={styles.textoBotao}>Clique em mim!</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={login} style={styles.buttom}>
-                        <View style={styles.botao}>
-                            <Text style={styles.textoBotao}>Login</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={passwordRecovery} style={styles.buttom}>
-                        <View style={styles.botao}> 
-                            <Text style={styles.textoBotao}>Recuperar senha</Text>
-                        </View>
-                    </TouchableOpacity>
                 </ImageBackground>
             </View>
             

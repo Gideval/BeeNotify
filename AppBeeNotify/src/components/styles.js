@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-between',
-      paddingTop: '10%',
     },
     topView: {
       backgroundColor: '#FFBB00',
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
       width: '100%',  
       height: '100%', 
       justifyContent: 'center',
-      alignItems: 'center',
     },
     botao: {
       backgroundColor: 'blue',
@@ -75,6 +73,57 @@ const styles = StyleSheet.create({
     buttom: {
       padding: 5,
     },
+    horizontalBar: {
+      backgroundColor: '#EDEDED',
+      height: '0.4%',
+      width: '90%',
+      marginVertical: 10
+    },
+    connectivityStatus: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    textButtom: {
+      fontSize: 14,
+      color: '#fff'
+    },
+    styleButtom: {
+      borderRadius: 10,
+      backgroundColor: '#FB0',
+      height: '14%',
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    textStatus: {
+      fontSize: 22,
+      color:'#CD6F00'
+    },
+    space:{
+      paddingTop: 30
+    },
+    content: {
+      marginLeft: 35, // Adicione a margem desejada à esquerda
+    },
+    textInformative: {
+      padding: 5,
+      fontSize: 13,
+    },
+    textDataSystem: {
+      fontSize: 17,
+      color: '#CD6F00',
+      paddingTop: 15
+    },
+    textApiario: {
+      fontWeight: 'bold',
+      fontSize: 17,
+      paddingLeft: 20
+    },
+    textUser: {
+      fontSize: 17,
+      paddingLeft: 20
+    }
+    
   });
 
   export { styles };
