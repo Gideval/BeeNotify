@@ -5,7 +5,9 @@ import { useFonts, Inter_800ExtraBold, Inter_400Regular} from "@expo-google-font
 import { useNavigation, useRoute } from "@react-navigation/native"
 import DateTimePickerModal from '@react-native-community/datetimepicker';
 import firebaseDB from "../backend/firebaseDB";
+import { receivedMessage, publishMessage } from "../backend/serverMQTT";
 import { styles } from "../components";
+import { format } from "date-fns";
 
 function MainScreen () {
     const navigation = useNavigation();
@@ -18,6 +20,11 @@ function MainScreen () {
     const [pickerDate, setPickerDate] = useState(new Date());
     const [showPicker, setShowPicker] = useState(false);
     const [id, setId] = useState();
+    const [mqttStatus, setMqttStatus] = useState('');
+    const [colorStatus, setColorStatus] = useState('#23238E');
+    const [messageMQTT, setMessageMQTT] = useState('');
+    const [localDateTime, setLocalDateTime] = useState(new Date());
+    const [formattedDateTime, setFormattedDateTime] = useState('');
 
     let [fontsLoaded, fontError] = useFonts({
         Inter_400Regular,
@@ -37,15 +44,10 @@ function MainScreen () {
     const onChangeDate = async (event, selectedDate) => {
     	
         if(event.type === 'set') {
-            console.log('Entrou onchamgeDate')
-            console.log(event.type)
-            console.log(pickerDate.toLocaleDateString('pt-BR').replace(/\//g, '-'))
-            console.log('Selectdate')
-            console.log(selectedDate)
             const currentDate = selectedDate || pickerDate;
             setShowPicker(Platform.OS === 'ios');
             setPickerDate(currentDate);
-            await db.updateData(id, currentDate.toLocaleDateString('pt-BR').replace(/\//g, '-'))
+            await db.updateData(id, currentDate.toLocaleDateString('pt-BR'))
 
         }
 
@@ -55,12 +57,28 @@ function MainScreen () {
         setShowPicker(true);
     };
 
+    const connectionMqtt = () => {
+
+        publishMessage('Status');
+        setMessageMQTT(receivedMessage);
+
+        setLocalDateTime(new Date());
+        setFormattedDateTime(format(localDateTime, 'dd/MM/yyyy HH:mm'))
+     
+        if (messageMQTT !== ''){
+            setMqttStatus(`Conectado ${formattedDateTime}h`)
+            setColorStatus('#20F65C');
+        }
+        else {
+            setColorStatus('#ff0000');
+            setMqttStatus(`Desconectado ${formattedDateTime}h`);
+        }
+    }
+
     useEffect(() => {
         getDataDB();
-        //date,
-        //pickerDate,
-        console.log('DataDB:', date);
-      }, [date, id, pickerDate]);
+      }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT, localDateTime, formattedDateTime]);
+
 
     return (
         <View style={styles.container}>
@@ -85,8 +103,12 @@ function MainScreen () {
                             <FontAwesome name="wifi" size={24} color="#CD6F00" />
                             <Text style={[styles.textStatus, {fontFamily: 'Inter_800ExtraBold'}]}>Conectividade</Text>
                         </View>
-                        <Text style={[styles.textInformative, {fontFamily: 'Inter_400Regular'}]}>Status: </Text>
-                        <TouchableOpacity style={styles.styleButtom}>
+                        <View style={styles.connectivityStatus}>
+                            <Text style={[styles.textInformative, {fontFamily: 'Inter_400Regular'}]}>Status: </Text>
+                            <FontAwesome name="circle" size={12} color={colorStatus} />
+                            <Text style={[styles.textInformative, {fontFamily: 'Inter_400Regular'}]}>{mqttStatus}</Text>
+                        </View>
+                        <TouchableOpacity style={styles.styleButtom} onPress={connectionMqtt}>
                             <View style={styles.connectivityStatus}>
                                 <MaterialIcons name="refresh" size={24} color="#FFF" />
                                 <Text style={[styles.textButtom, {fontFamily: 'Inter_400Regular'}]}>ATUALIZAR STATUS</Text>

@@ -36,3 +36,6 @@ yarn-error.*
 
 # Config DB
 firebaseDB.js
+
+#Config Server Broker
+serverMQTT.js
