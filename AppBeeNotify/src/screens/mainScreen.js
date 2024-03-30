@@ -5,7 +5,7 @@ import { useFonts, Inter_800ExtraBold, Inter_400Regular} from "@expo-google-font
 import { useNavigation, useRoute } from "@react-navigation/native"
 import DateTimePickerModal from '@react-native-community/datetimepicker';
 import firebaseDB from "../backend/firebaseDB";
-import { receivedMessage, publishMessage } from "../backend/serverMQTT";
+import { publishMessage, setMessageCallBack } from "../backend/serverMQTT";
 import { styles } from "../components";
 import { format } from "date-fns";
 
@@ -60,8 +60,10 @@ function MainScreen () {
     const connectionMqtt = () => {
 
         publishMessage('Status');
-        setMessageMQTT(receivedMessage);
-
+        setMessageCallBack( message => {
+            setMessageMQTT(message);
+        })
+        
         setLocalDateTime(new Date());
         setFormattedDateTime(format(localDateTime, 'dd/MM/yyyy HH:mm'))
      
