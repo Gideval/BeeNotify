@@ -6,6 +6,7 @@ import LoginPage from "../screens/login";
 import RegistrationPage from "../screens/registrationScreen";
 import PasswordRecovery from "../screens/passwordRecovery";
 import MainScreen from "../screens/mainScreen";
+import AlarmScreen from "../screens/alarmScreen";
 
 const stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ function AppNavigator () {
                 <stack.Screen name="RegistrationPage" component={RegistrationPage} options={{headerShown: false}} />
                 <stack.Screen name="PasswordRecovery" component={PasswordRecovery} options={{headerShown: false}} />
                 <stack.Screen name="MainScreen" component={MainScreen} options={{headerShown: false}} />
+                <stack.Screen name="AlarmScreen" component={AlarmScreen} options={{headerShown: false}} />
             </stack.Navigator>
         </NavigationContainer>
     )

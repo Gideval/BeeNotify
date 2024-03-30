@@ -82,7 +82,7 @@ function MainScreen () {
         getDataDB();
       }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT, localDateTime, formattedDateTime]);
 
-
+    
     return (
         <View style={styles.container}>
             <View style={styles.topView}>

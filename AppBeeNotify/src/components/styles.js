@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    topViewAlarm: {
+      backgroundColor: '#FFBB00',
+      width: '100%', 
+      height: '65%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     middleView: {
       position: 'absolute',
       top: 200, 
@@ -24,9 +31,29 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    middleViewAlarm: {
+      position: 'absolute',
+      top: 500, 
+      backgroundColor: '#ffff',
+      width: '100%', 
+      height: '55%',
+      borderTopLeftRadius: 50,
+      borderTopRightRadius: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     responsiveImage: {
       resizeMode:'contain',
       height: '45%'
+    },
+    responsiveImageAlarm: {
+      resizeMode:'contain',
+      height: '15%'
+    },
+    responsiveImageBell: {
+      resizeMode:'contain',
+      height: '25%',
+      width: '100%'
     },
     brandText: {
       color: '#CD6F00',
@@ -95,6 +122,24 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
     },
+    alarmButtom: {
+      borderRadius: 10,
+      backgroundColor: '#C8C8C8',
+      height: '28%',
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    callButtom: {
+      borderRadius: 10,
+      backgroundColor: '#FB0',
+      height: '28%',
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: '#CD6F00',
+      borderWidth: 2
+    },
     textStatus: {
       fontSize: 22,
       color:'#CD6F00'
@@ -108,6 +153,11 @@ const styles = StyleSheet.create({
     textInformative: {
       padding: 5,
       fontSize: 13,
+    },
+    AlarmText: {
+      color: '#FFF',
+      fontSize: 22,
+      marginTop: '-5%',
     },
     textDataSystem: {
       fontSize: 17,
