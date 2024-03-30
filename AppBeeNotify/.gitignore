@@ -34,8 +34,5 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# Config DB
-firebaseDB.js
-
 #Config constants
 constants.js

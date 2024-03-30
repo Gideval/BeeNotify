@@ -62,6 +62,7 @@ function MainScreen () {
         publishMessage('Status');
         setMessageCallBack( message => {
             setMessageMQTT(message);
+            console.log(message)
         })
         
         setLocalDateTime(new Date());
