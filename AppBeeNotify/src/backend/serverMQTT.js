@@ -14,6 +14,7 @@ const client = mqtt.connect(CONNECT_MQTT, options);
 client.on('connect', () => {
     console.log('Connected to MQTT broker');
     client.subscribe('my/test/Hardware');
+    client.subscribe('my/test/Alert');
 });
 
 client.on('message', (topic, message) => {

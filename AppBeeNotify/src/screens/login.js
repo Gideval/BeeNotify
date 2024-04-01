@@ -44,9 +44,7 @@ function LoginPage () {
         console.log(resultLogin)
 
         if (resultLogin) {
-            //navigation.navigate('MainScreen', {userEmail : email});
-        
-            navigation.navigate('AlarmScreen');
+            navigation.navigate('MainScreen', {userEmail : email});
         }
         else {
             alert('Falha no login');

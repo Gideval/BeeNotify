@@ -25,6 +25,7 @@ function MainScreen () {
     const [messageMQTT, setMessageMQTT] = useState('');
     const [localDateTime, setLocalDateTime] = useState(new Date());
     const [formattedDateTime, setFormattedDateTime] = useState('');
+    const [cont, setCont] = useState(0);
 
     let [fontsLoaded, fontError] = useFonts({
         Inter_400Regular,
@@ -68,7 +69,7 @@ function MainScreen () {
         setLocalDateTime(new Date());
         setFormattedDateTime(format(localDateTime, 'dd/MM/yyyy HH:mm'))
      
-        if (messageMQTT !== ''){
+        if (messageMQTT != 'Connected'){
             setMqttStatus(`Conectado ${formattedDateTime}h`)
             setColorStatus('#20F65C');
         }
@@ -77,10 +78,60 @@ function MainScreen () {
             setMqttStatus(`Desconectado ${formattedDateTime}h`);
         }
     }
+    
+    const callAlarmScreen = () => {
+        navigation.navigate('AlarmScreen');
+    }
+
+    useEffect(() => {
+        connectionMqtt();
+    }, [messageMQTT, formattedDateTime])
+
+    useEffect(() =>{
+        console.log('Entrou no effect  setMessage')
+        setMessageCallBack(message => {
+            console.log(message)
+            console.log('-----------------------')
+            if(message === 'Alert') {
+                callAlarmScreen();
+            }
+        })
+
+        return () => {
+            setMessageCallBack(null);
+        }
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            publishMessage('Status');
+
+            setMessageCallBack(message => {
+                setMessageMQTT(message);
+            })
+
+            if(cont === 3) {
+                setCont(0);
+                alert('Dispositivo Desconectado!')
+            }
+            else if(messageMQTT != 'Alert' || messageMQTT != 'Connected') {
+                setCont(cont + 1);
+            }
+            else if(messageMQTT === 'Connected') {
+                setCont(0);
+            }
+        }, 1 * 60 * 1000)
+
+        return () => {
+            setMessageCallBack(null);
+            clearInterval(interval);
+        }
+
+    }, []);
 
     useEffect(() => {
         getDataDB();
-      }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT, localDateTime, formattedDateTime]);
+      }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT, localDateTime]);
 
     
     return (
