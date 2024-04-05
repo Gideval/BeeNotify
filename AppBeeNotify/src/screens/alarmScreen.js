@@ -22,7 +22,6 @@ function AlarmScreen (){
     const [sound, setSound] = useState(new Sound());
 
     async function playSound() {
-        console.log('Loading Sound');
         const { sound } = await Audio.Sound.createAsync(require('../../assets/Alarm.mp3'));
         setSound(sound);
 

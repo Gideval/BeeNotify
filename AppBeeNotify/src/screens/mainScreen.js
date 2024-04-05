@@ -23,8 +23,6 @@ function MainScreen () {
     const [mqttStatus, setMqttStatus] = useState('');
     const [colorStatus, setColorStatus] = useState('#23238E');
     const [messageMQTT, setMessageMQTT] = useState('');
-    const [localDateTime, setLocalDateTime] = useState(new Date());
-    const [formattedDateTime, setFormattedDateTime] = useState('');
     const [cont, setCont] = useState(0);
 
     let [fontsLoaded, fontError] = useFonts({
@@ -58,24 +56,20 @@ function MainScreen () {
         setShowPicker(true);
     };
 
-    const connectionMqtt = () => {
-
+    const connectionMqtt = async () => {
         publishMessage('Status');
         setMessageCallBack( message => {
             setMessageMQTT(message);
             console.log(message)
         })
-        
-        setLocalDateTime(new Date());
-        setFormattedDateTime(format(localDateTime, 'dd/MM/yyyy HH:mm'))
      
         if (messageMQTT != 'Connected'){
-            setMqttStatus(`Conectado ${formattedDateTime}h`)
+            setMqttStatus(`Conectado ${format(new Date(), 'dd/MM/yyyy HH:mm')}h`)
             setColorStatus('#20F65C');
         }
         else {
             setColorStatus('#ff0000');
-            setMqttStatus(`Desconectado ${formattedDateTime}h`);
+            setMqttStatus(`Desconectado ${format(new Date(), 'dd/MM/yyyy HH:mm')}h`);
         }
     }
     
@@ -83,55 +77,53 @@ function MainScreen () {
         navigation.navigate('AlarmScreen');
     }
 
+    useEffect(() =>{
+        const intervalId = setInterval(() => {
+            setMessageCallBack(message => {
+                if (message === 'Alert') {
+                    callAlarmScreen();
+                }
+            });
+        }, 1000); // 1000 milissegundos = 1 segundo
+    
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
+    
     useEffect(() => {
         connectionMqtt();
-    }, [messageMQTT, formattedDateTime])
-
-    useEffect(() =>{
-        console.log('Entrou no effect  setMessage')
-        setMessageCallBack(message => {
-            console.log(message)
-            console.log('-----------------------')
-            if(message === 'Alert') {
-                callAlarmScreen();
-            }
-        })
-
-        return () => {
-            setMessageCallBack(null);
-        }
     }, []);
-
+    
     useEffect(() => {
         const interval = setInterval(async () => {
             publishMessage('Status');
-
+    
             setMessageCallBack(message => {
                 setMessageMQTT(message);
-            })
-
+            });
+    
             if(cont === 3) {
                 setCont(0);
-                alert('Dispositivo Desconectado!')
+                alert('Dispositivo Desconectado!');
             }
-            else if(messageMQTT != 'Alert' || messageMQTT != 'Connected') {
-                setCont(cont + 1);
+            else if(messageMQTT !== 'Alert' && messageMQTT !== 'Connected') {
+                setCont(prevCont => prevCont + 1);
             }
             else if(messageMQTT === 'Connected') {
                 setCont(0);
             }
-        }, 1 * 60 * 1000)
-
+        }, 1 * 60 * 1000);
+    
         return () => {
-            setMessageCallBack(null);
             clearInterval(interval);
-        }
-
-    }, []);
-
+        };
+    }, [connectionMqtt]);
+    
     useEffect(() => {
         getDataDB();
-      }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT, localDateTime]);
+        
+      }, [date, id, pickerDate, mqttStatus, colorStatus, messageMQTT]);
 
     
     return (
