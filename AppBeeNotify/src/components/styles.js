@@ -31,6 +31,54 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    middleViewLogin: {
+      position: 'absolute',
+      top: 200, 
+      backgroundColor: '#ffff',
+      width: '100%', 
+      height: '80%',
+      borderTopLeftRadius: 50,
+      borderTopRightRadius: 50,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    contentLogin: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    imageBackgroundLogin: {
+      width: '100%',  
+      height: '100%', 
+      justifyContent: 'flex-start',
+    },
+    styleButtomLogin: {
+      borderRadius: 10,
+      backgroundColor: '#FB0',
+      height: '11%',
+      width: '90%',
+      marginTop: '4%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    passwordButtom: {
+      borderRadius: 10,
+      backgroundColor: '#FFFFFF',
+      height: '11%',
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: '5%',
+      borderColor: '#FB0',
+      borderWidth: 2
+    },
+    textButtomLogin: {
+      fontSize: 14,
+      color: '#FB0'
+    },
+    loginScpace: {
+      marginTop: '16%'
+    },
     middleViewAlarm: {
       position: 'absolute',
       top: 500, 
@@ -54,6 +102,42 @@ const styles = StyleSheet.create({
       resizeMode:'contain',
       height: '25%',
       width: '100%'
+    },
+    loginText: {
+      color: '#CD6F00',
+      fontSize: 18,
+      marginEnd: '75%',
+      //marginBottom: '3%'
+    },
+    callButtom: {
+      borderRadius: 10,
+      backgroundColor: '#FB0',
+      height: '28%',
+      width: '90%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: '#CD6F00',
+      borderWidth: 2
+    },
+    emailPasswordText: {
+      color: '#CD6F00',
+      fontSize: 22,
+      marginEnd: '60%',
+      marginTop: '3%'
+    },
+    textInputEmail: {
+      width: 345,
+      height: '10%',
+      borderRadius: 8,
+      paddingLeft: 15,
+      backgroundColor: '#F6F5F5'
+    },
+    textInputPassword: {
+      width: 345,
+      height: '10%',
+      borderRadius: 8,
+      paddingLeft: 15,
+      backgroundColor: '#F6F5F5'
     },
     brandText: {
       color: '#CD6F00',

@@ -1,8 +1,7 @@
 import React,  { useState } from "react";
 import { View, Image, Text, TextInput, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import { styles } from '../components/index';
-import { Ionicons } from '@expo/vector-icons';
-import { useFonts, Inter_900Black, Inter_800ExtraBold} from '@expo-google-fonts/inter'
+import { useFonts, Inter_400Regular, Inter_900Black, Inter_800ExtraBold} from '@expo-google-fonts/inter'
 import { useNavigation } from "@react-navigation/native";
 import firebaseDB from "../backend/firebaseDB";
 
@@ -11,6 +10,7 @@ function LoginPage () {
     const db = firebaseDB();
 
     let [fontsLoaded, fontError] = useFonts({
+        Inter_400Regular,
         Inter_900Black,
         Inter_800ExtraBold,
     });
@@ -26,10 +26,6 @@ function LoginPage () {
     /*const emailData = {
         useremail: email,
     }*/
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
 
     const handleButtonPress = () => {
         navigation.navigate("RegistrationPage");
@@ -58,50 +54,47 @@ function LoginPage () {
                     <Text style={[styles.brandText, {fontFamily: 'Inter_800ExtraBold'}]}>BeeNotify</Text>
                 </View> 
             </View>
-            <View style={styles.middleView}>
-                <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackground}>
-                    <View style={styles.content}> 
-                        <Text>Email:</Text>
+            <View style={styles.middleViewLogin}>
+                <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackgroundLogin}>
+                    <View style={styles.contentLogin}>
+                        <Text style={[styles.loginText, {fontFamily: 'Inter_400Regular'}]}>LOGIN</Text>
+                        <Text style={[styles.emailPasswordText, {fontFamily: 'Inter_900Black'}]}>E-mail</Text>
                         <TextInput
-                            style={styles.input}
-                            placeholder="Digite seu email"
+                            style={styles.textInputEmail}
+                            placeholder="DIGITE SEU E-MAIL"
+                            placeholderTextColor= '#acabab'
                             value={email}
                             onChangeText={(text) => setEmail(text)}
                         />
-
-                        <Text>Senha:</Text>
-                        <View style={styles.passwordContainer}>
-                            <TextInput
-                            style={styles.input}
-                            placeholder="Digite sua senha"
+                        
+                        <Text style={[styles.emailPasswordText, {fontFamily: 'Inter_900Black'}]}>Senha</Text>
+                        <TextInput
+                            style = {styles.textInputPassword}
+                            placeholder="DIGITE SUA SENHA"
+                            placeholderTextColor= '#acabab'
                             secureTextEntry={!showPassword}
                             value={password}
                             onChangeText={(text) => setPassword(text)}
-                            />
-                            <TouchableOpacity onPress={togglePasswordVisibility}>
-                            <Ionicons
-                                name={showPassword ? 'eye-off' : 'eye'}
-                                size={24}
-                                color="black"
-                            />
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity onPress={handleButtonPress} style={styles.buttom}>
-                            <View style={styles.botao}>
-                                <Text style={styles.textoBotao}>Clique em mim!</Text>
+                        />
+        
+                        <TouchableOpacity style={styles.styleButtomLogin} onPress={login}>
+                            <View style={styles.connectivityStatus}>
+                                <Text style={[styles.textButtom, {fontFamily: 'Inter_800ExtraBold'}]}>Login</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={login} style={styles.buttom}>
-                            <View style={styles.botao}>
-                                <Text style={styles.textoBotao}>Login</Text>
+                        <View style={styles.loginScpace}></View>
+                        <TouchableOpacity style={styles.styleButtomLogin} onPress={handleButtonPress}>
+                            <View style={styles.connectivityStatus}>
+                                <Text style={[styles.textButtom, {fontFamily: 'Inter_800ExtraBold'}]}>Registre-se agora!</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={passwordRecovery} style={styles.buttom}>
-                            <View style={styles.botao}> 
-                                <Text style={styles.textoBotao}>Recuperar senha</Text>
+                        <TouchableOpacity style={styles.passwordButtom} onPress={passwordRecovery}>
+                            <View style={styles.connectivityStatus}>
+                                <Text style={[styles.textButtomLogin, {fontFamily: 'Inter_800ExtraBold'}]}>Esqueceu a senha?</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
+
                 </ImageBackground>
             </View>
             
