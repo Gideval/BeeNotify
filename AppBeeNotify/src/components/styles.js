@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
       color: '#CD6F00',
       fontSize: 22,
       marginEnd: '60%',
-      marginTop: '3%'
+      marginTop: '3%',
     },
     textInputEmail: {
       width: 345,
@@ -138,6 +138,13 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       paddingLeft: 15,
       backgroundColor: '#F6F5F5'
+    },
+    registerText: {
+      color: '#CD6F00',
+      fontSize: 22,
+      marginEnd: '2%',
+      marginTop: '3%',
+      width: '80%'
     },
     brandText: {
       color: '#CD6F00',

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useFonts, Inter_800ExtraBold} from "@expo-google-fonts/inter"
+import { useFonts, Inter_900Black, Inter_800ExtraBold} from "@expo-google-fonts/inter"
 import { useNavigation} from "@react-navigation/native"
 import { styles } from "../components/index";
 import firebaseDB from "../backend/firebaseDB";
@@ -12,11 +12,13 @@ function RegistrationPage () {
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [messagePassword, setMessagePassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigation = useNavigation();
     const db = firebaseDB();
 
     let [fontsLoaded, fontError] = useFonts ({
+        Inter_900Black,
         Inter_800ExtraBold,
     });
 
@@ -69,40 +71,52 @@ function RegistrationPage () {
                 </View>
             </View>
             <View style={styles.middleView}>
-                <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackground}>
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder="nome" 
-                        value={name}
-                        onChangeText={(textName) => setName(textName)} />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder="email"
-                        value={email}
-                        onChangeText={(textEmail) => setEmail(textEmail)}/>
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder="Senha"
-                        onChangeText={(textPassword) => {
-                            setPassword(textPassword)
-                            comparePasswor()}}
-                        value={password} 
+                <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackgroundLogin}>
+                    <View style={styles.contentLogin}>
+                        <Text style={[styles.registerText, {fontFamily: 'Inter_900Black'}]}>Nome Completo</Text>
+                        <TextInput 
+                            style={styles.textInputEmail}
+                            placeholder="DIGITE SEU NOME COMPLETO" 
+                            placeholderTextColor= '#acabab'
+                            value={name}
+                            onChangeText={(textName) => setName(textName)} />
+                        <Text style={[styles.registerText, {fontFamily: 'Inter_900Black'}]}>E-mail</Text>
+                        <TextInput 
+                            style={styles.textInputEmail}
+                            placeholder="DIGITE SEU ENDEREÇO DE E-MAIL" 
+                            placeholderTextColor= '#acabab'
+                            value={email}
+                            onChangeText={(textEmail) => setEmail(textEmail)}/>
+                        <Text style={[styles.registerText, {fontFamily: 'Inter_900Black'}]}>Defina uma senha</Text>
+                        <TextInput
+                            style={styles.textInputPassword}
+                            placeholder="DIGITE SUA SENHA"
+                            placeholderTextColor= '#acabab'
+                            secureTextEntry={!showPassword}
+                            onChangeText={(textPassword) => {
+                                setPassword(textPassword)
+                                comparePasswor()}}
+                            value={password} 
+                        />
+                        <Text style={[styles.registerText, {fontFamily: 'Inter_900Black'}]}>Repita a senha</Text>
+                        <TextInput 
+                            style={styles.textInputPassword}
+                            placeholder="DIGITE SUA SENHA NOVAMENTE"
+                            placeholderTextColor= '#acabab'
+                            secureTextEntry={!showPassword}
+                            onChangeText={(textPassword) =>  {
+                                setRepeatPassword(textPassword)
+                                comparePasswor()}}
+                            value={repeatPassword}
+                            onEndEditing={comparePasswor}
                          />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder="Repita a senha"
-                        onChangeText={(textPassword) =>  {
-                            setRepeatPassword(textPassword)
-                            comparePasswor()}}
-                        value={repeatPassword}
-                        onEndEditing={comparePasswor}
-                         />
-                    <Text>{messagePassword}</Text>
-                    <TouchableOpacity onPress={submitRegistration}>
-                        <View style={styles.botao}>
-                            <Text style={styles.textoBotao}>Cadastrar</Text>
-                        </View>
-                    </TouchableOpacity>
+                         <TouchableOpacity style={styles.styleButtomLogin} onPress={submitRegistration}>
+                            <View style={styles.connectivityStatus}>
+                                <Text style={[styles.textButtom, {fontFamily: 'Inter_800ExtraBold'}]}>Concluir</Text>
+                            </View>
+                        </TouchableOpacity>
+                         
+                    </View>
                 </ImageBackground>
             </View>
         </View>
@@ -110,5 +124,3 @@ function RegistrationPage () {
 }
 
 export default RegistrationPage
-
-//{messagePassword !== '' && <Text>{messagePassword}</Text>}
