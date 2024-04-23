@@ -23,10 +23,6 @@ function LoginPage () {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    /*const emailData = {
-        useremail: email,
-    }*/
-
     const handleButtonPress = () => {
         navigation.navigate("RegistrationPage");
       };

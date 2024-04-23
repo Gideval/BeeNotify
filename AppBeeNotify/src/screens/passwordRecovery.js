@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useFonts, Inter_800ExtraBold } from "@expo-google-fonts/inter"
+import { useFonts, Inter_900Black, Inter_800ExtraBold } from "@expo-google-fonts/inter"
 import { useNavigation} from "@react-navigation/native"
 import { styles } from "../components";
 import firebaseDB from "../backend/firebaseDB";
@@ -12,7 +12,8 @@ function PasswordRecovery () {
     const [ email, setEmail] = useState('');
 
     let [fontsLoaded, fontError] = useFonts({
-        Inter_800ExtraBold,
+        Inter_900Black,
+        Inter_800ExtraBold
     });
 
     if (!fontsLoaded && fontError) {
@@ -34,18 +35,20 @@ function PasswordRecovery () {
             </View>
             <View style={styles.middleView}>
                 <ImageBackground source={require('../../assets/Union.png')} style={styles.imageBackground}>
-                    <Text>Email</Text>
-                    <TextInput 
-                        style={styles.input}
-                        placeholder="Digite seu email"
-                        value={email}
-                        onChangeText={(text) => setEmail(text)}
-                    />
-                    <TouchableOpacity onPress={recovery}>
-                        <View style={styles.botao}>
-                            <Text style={styles.textoBotao}>Login</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={styles.contentLogin}>
+                    <Text style={[styles.registerText, {fontFamily: 'Inter_900Black'}]}>E-mail</Text>
+                        <TextInput 
+                            style={styles.textInputEmail}
+                            placeholder="DIGITE SEU ENDEREÇO DE E-MAIL" 
+                            placeholderTextColor= '#acabab'
+                            value={email}
+                            onChangeText={(textEmail) => setEmail(textEmail)}/>
+                        <TouchableOpacity style={styles.styleButtomLogin} onPress={recovery}>
+                            <View style={styles.connectivityStatus}>
+                                <Text style={[styles.textButtom, {fontFamily: 'Inter_800ExtraBold'}]}>Enviar Email</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </ImageBackground>
             </View>
         </View>

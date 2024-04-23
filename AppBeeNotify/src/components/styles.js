@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
       marginTop: '3%',
     },
     textInputEmail: {
-      width: 345,
+      width: 355,
       height: '10%',
       borderRadius: 8,
       paddingLeft: 15,
