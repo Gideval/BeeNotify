@@ -56,13 +56,11 @@ function firebaseDB () {
             alert('No momento, não foi possível atualizar a data')
         }
 
-        //return (message)
     }
 
     async function signupApp (userName, date, userEmail, password) {
         await addData(userName, userEmail, date);
 
-        console.log('Senha signUpApp')
         console.log(password)
 
         var message = '';
@@ -75,7 +73,6 @@ function firebaseDB () {
         }
         catch (error) {
             message = 'Falha ao cadastra usuário';
-            console.log('Falha ao cadastra usuário', error)
             alert('Falha ao cadastra usuário', error)
             
         }
