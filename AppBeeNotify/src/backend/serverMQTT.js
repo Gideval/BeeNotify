@@ -1,17 +1,14 @@
 import mqtt from 'precompiled-mqtt';
-import { USER_NAME, PASSWORD, CONNECT_MQTT } from './constants';
 
 let messageCallback = null;
 
-const options = {
-    username: USER_NAME,
-    password: PASSWORD,
-    clientId: `mqttjs_${Math.random().toString(16).substring(2, 8)}`,
-};
+console.log("Entro no servidor mqtt");
 
-const client = mqtt.connect(CONNECT_MQTT, options);
+const client = mqtt.connect('ws://test.mosquitto.org:8080/mqtt');
 
 client.on('connect', () => {
+    console.log("Entrou na conexão mqtt")
+    console.log("CONNECTED to broker");
     client.subscribe('my/test/Hardware');
     client.subscribe('my/test/Alert');
 });

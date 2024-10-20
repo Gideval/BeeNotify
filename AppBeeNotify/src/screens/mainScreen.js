@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, Platform, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons"
 import { useFonts, Inter_800ExtraBold, Inter_400Regular} from "@expo-google-fonts/inter"
 import { useNavigation, useRoute } from "@react-navigation/native"
